@@ -15,5 +15,4 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 8080
-CMD [ "node", "server.js" ]
+CMD [ "./node_modules/nodemon/bin/nodemon.js", "server.js" ]
