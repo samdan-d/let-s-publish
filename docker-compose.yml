@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mongodb:
+    image: mongo
+    networks:
+      - let-s-publish-network
+  #  client:
+  #    ...
+  post_api:
+    build: ./services/post/
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./services/post/:/post_api
+      - /post_api/node_modules
+    depends_on:
+      - mongodb
+    networks:
+      - let-s-publish-network
+#  comment_api:
+#    ...
+#  profile_api:
+#    ...
+#  notification_api:
+#    ...
+networks:
+  let-s-publish-network:
+    driver: bridge
