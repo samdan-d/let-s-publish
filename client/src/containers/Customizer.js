@@ -136,13 +136,13 @@ const CustomizerSystem = () => {
         {getPresetColors(themeColor)}
       </div>
 
-      <h6 className="gx-mb-3 gx-text-uppercase">Nav Style</h6>
+      {/*<h6 className="gx-mb-3 gx-text-uppercase">Nav Style</h6>*/}
 
-      {getNavStyles(navStyle)}
+      {/*{getNavStyles(navStyle)}*/}
 
-      <h6 className="gx-mb-3 gx-text-uppercase">Layout</h6>
+      {/*<h6 className="gx-mb-3 gx-text-uppercase">Layout</h6>*/}
 
-      {getLayoutsTypes(layoutType)}
+      {/*{getLayoutsTypes(layoutType)}*/}
     </CustomScrollbars>
   };
 

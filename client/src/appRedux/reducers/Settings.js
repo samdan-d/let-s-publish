@@ -3,7 +3,7 @@ import {
   LAYOUT_TYPE,
   LAYOUT_TYPE_FULL,
   NAV_STYLE,
-  NAV_STYLE_FIXED,
+  NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
   THEME_COLOR,
   THEME_TYPE,
   THEME_TYPE_SEMI_DARK
@@ -11,7 +11,7 @@ import {
 
 const initialSettings = {
   navCollapsed: true,
-  navStyle: NAV_STYLE_FIXED,
+  navStyle: NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
   layoutType: LAYOUT_TYPE_FULL,
   themeType: THEME_TYPE_SEMI_DARK,
   themeColor: THEME_COLOR,
@@ -58,9 +58,10 @@ const settings = (state = initialSettings, action) => {
       };
 
     case NAV_STYLE:
+
       return {
         ...state,
-        navStyle: action.navStyle
+        navStyle: NAV_STYLE_INSIDE_HEADER_HORIZONTAL
       };
     case LAYOUT_TYPE:
       return {
