@@ -12,4 +12,4 @@ const app = express();
 require('./src/Postroutes')(app);
 
 app.listen(PORT);
-console.log(`Running on http://localhost:${PORT}`);
+console.log(`Post api running on http://localhost:${PORT}`);

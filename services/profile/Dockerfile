@@ -1,7 +1,7 @@
 FROM node:12.16.3-alpine
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /profile_api
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -14,6 +14,6 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-
+EXPOSE 8082
 CMD ["npm", "start"]
 
