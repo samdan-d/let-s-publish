@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 
 const CryptoNewsItem =({data})=> {
@@ -16,9 +17,11 @@ const CryptoNewsItem =({data})=> {
             </p>
           </div>
           <div className="gx-news-tags-right">
-            <p className="gx-text-primary gx-pointer gx-mb-0">Ready Full Story
-              <i className={`icon icon-long-arrow-right gx-fs-xl gx-ml-2 gx-d-inline-flex gx-vertical-align-middle`}/>
-            </p>
+            <Link to={'/post/5ec3c1526835e601376e9954'}>
+              <p className="gx-text-primary gx-pointer gx-mb-0">Ready Full Story
+                <i className={`icon icon-long-arrow-right gx-fs-xl gx-ml-2 gx-d-inline-flex gx-vertical-align-middle`}/>
+              </p>
+            </Link>
           </div>
         </div>
       </div>
