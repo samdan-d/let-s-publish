@@ -2,29 +2,23 @@ import React from "react";
 import CKEditor from "react-ckeditor-component";
 import {Button, Card, Form, Input, Select, Upload} from "antd";
 
-import IntlMessages from "util/IntlMessages";
-
 class CK extends React.Component {
   constructor(props) {
     super(props);
     this.updateContent = this.updateContent.bind(this);
-    this.state = {
-      content: '<h2>Awesome Rich Content</h2>\n' +
-        '<p>Suspendisse id sollicitudin dui. <strong>Vestibulum eu sapien pharetra,</strong> bibendum ligula id, ullamcorper ligula.</p>\n' +
-        '\n' +
-        '<ul>\n' +
-        '        <li>ullamcorper ligula</li>\n' +
-        '        <li>Duis vel neque</li>\n' +
-        '</ul>\n' +
-        '\n' +
-        '<p><em>Sed feugiat hendrerit risus, quis efficitur massa facilisis vitae. Aliquam erat volutpat. </em></p>\n',
-    }
+    this.props.setContent('<h2>Awesome Rich Content</h2>\n' +
+      '<p>Suspendisse id sollicitudin dui. <strong>Vestibulum eu sapien pharetra,</strong> bibendum ligula id, ullamcorper ligula.</p>\n' +
+      '\n' +
+      '<ul>\n' +
+      '        <li>ullamcorper ligula</li>\n' +
+      '        <li>Duis vel neque</li>\n' +
+      '</ul>\n' +
+      '\n' +
+      '<p><em>Sed feugiat hendrerit risus, quis efficitur massa facilisis vitae. Aliquam erat volutpat. </em></p>\n');
   }
 
   updateContent(newContent) {
-    this.setState({
-      content: newContent
-    })
+    this.props.setContent(newContent);
   }
 
   onChange(evt) {
@@ -44,6 +38,7 @@ class CK extends React.Component {
 
   render() {
     const {getFieldDecorator} = this.props.form;
+    const {categories, tags, content} = this.props;
     const formItemLayout = {
       labelCol: {
         xs: {span: 8},
@@ -54,20 +49,8 @@ class CK extends React.Component {
         sm: {span: 22},
       },
     };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
-    let children = ['Game', 'Movie', 'IT', 'PC', 'Tennis', 'Golf'];
-    children = children.map(i => <Select.Option key={i.toString(36) + i}>{i}</Select.Option>);
+
+    const options = (items) => items.map(i => <Select.Option key={i._id}>{i.name}</Select.Option>);
 
     const uploadProps = {
       action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -75,34 +58,44 @@ class CK extends React.Component {
       defaultFileList: [],
     };
 
-
     return (
       <Card className="gx-card" title='New Post'>
         <Form {...formItemLayout}>
-          <Form.Item>
-            <Select defaultValue="publish" style={{width: '10%', marginLeft: 20}}>
-              <Select.Option value="publish">Publish</Select.Option>
-              <Select.Option value="draft">Draft</Select.Option>
-            </Select>
-
-            <Select defaultValue="technology" style={{width: '15%', marginLeft: 20}}>
-              <Select.Option value="technology">Technology</Select.Option>
-              <Select.Option value="entertainment">Entertainment</Select.Option>
-              <Select.Option value="sport">Sport</Select.Option>
-            </Select>
-
-            <Select mode="tags" style={{width: '68%', marginLeft: 20}} placeholder="Tags">{children}</Select>
+          <Form.Item label='State'>
+            {getFieldDecorator('state', {
+              rules: [{required: true, message: 'Please select post state!'}], initialValue: 'publish'
+            })(
+              <Select style={{width: '15%', marginLeft: 20}}>
+                <Select.Option value="publish">Publish</Select.Option>
+                <Select.Option value="draft">Draft</Select.Option>
+              </Select>
+            )}
           </Form.Item>
+
+          <Form.Item label='Category'>
+            {getFieldDecorator('_category', {
+              rules: [{required: true, message: 'Please select post category!'}],
+            })(
+              <Select style={{width: '15%', marginLeft: 20}}>{options(categories)}</Select>
+            )}
+          </Form.Item>
+
+          <Form.Item label='Tags'>
+            {getFieldDecorator('_tags')(
+              <Select mode="tags" style={{width: '80%', marginLeft: 20}} placeholder="Tags">{options(tags)}</Select>
+            )}
+          </Form.Item>
+
           <Form.Item label={<span>Title</span>}>
-            {getFieldDecorator('nickname', {
-              rules: [{required: true, message: 'Please input your nickname!', whitespace: true}],
+            {getFieldDecorator('title', {
+              rules: [{required: true, message: 'Please input your title!', whitespace: true}],
             })(<Input/>)}
           </Form.Item>
 
           <Form.Item>
             <CKEditor
               activeClass="p10"
-              content={this.state.content}
+              content={content}
               events={{
                 'blur': this.onBlur.bind(this),
                 'afterPaste': this.afterPaste.bind(this),
@@ -111,17 +104,18 @@ class CK extends React.Component {
             />
           </Form.Item>
 
-          <Form.Item>
-            <Upload {...uploadProps}>
+          <Form.Item label="Image">
+            {getFieldDecorator('image', {
+              rules: [{required: true}],
+            })(<Upload {...uploadProps}>
               <Button> <i className='icon icon-upload'/> Upload </Button>
-            </Upload>
+            </Upload>)}
+
           </Form.Item>
         </Form>
-
-        <Button type="primary" htmlType="submit"> Publish / Draft </Button>
       </Card>
     )
   }
 }
 
-export default Form.create({name: 'PostForm'})(CK);
+export default CK;

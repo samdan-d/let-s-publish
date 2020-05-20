@@ -32,7 +32,7 @@ const BalanceHistory = () => {
     <Widget styleName="gx-card-full">
 
       <div className="ant-row-flex gx-px-4 gx-pt-4">
-        <h2 className="h4 gx-mb-3">Balance History</h2>
+        <h2 className="h4 gx-mb-3">Post reaches</h2>
         <div className="gx-ml-auto">
           <Select className="gx-mb-2 gx-select-sm" defaultValue="10" onChange={handleChange}>
             <Option value="10">Last 10 days</Option>

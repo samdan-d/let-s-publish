@@ -8,7 +8,7 @@ import ExtraComponents from "./extraComponents/index";
 import InBuiltApps from "./inBuiltApps/index";
 import SocialApps from "./socialApps/index";
 import Main from "./main/index";
-import Admin from "routes/admin";
+import Admin from "routes/admin/index";
 import Documents from "./documents/index";
 
 const App = ({match}) => (

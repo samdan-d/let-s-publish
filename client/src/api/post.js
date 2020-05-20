@@ -10,6 +10,24 @@ const profileInstance = axios.create({
   headers: {'Authorization': `Bearer ${localStorage.getItem('access_token')}`}
 });
 
+export const postApi = {
+  getAll: () => instance.get('/posts'),
+  get: (id) => instance.get(`/posts/${id}`),
+  uploadImage: (id, file) => {
+    const formData = new FormData();
+    formData.append('image',file)
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+    return instance.post(`/posts/upload-image/${id}`, formData, config);
+  },
+  create: (post) => instance.post('/posts', {...post}),
+  update: (id, name) => instance.put(`/posts/${id}`, {name}),
+  delete: (id) => instance.delete(`/posts/${id}`)
+}
+
 export const tagApi = {
   getAll: () => instance.get('/tags'),
   create: (name) => instance.post('/tags', {name}),

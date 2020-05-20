@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Dropdown, Icon, Layout, Menu, message, Popover} from 'antd';
 import {connect, useDispatch, useSelector} from "react-redux";
 import AppNotification from "components/AppNotification";
 import HorizontalNav from "../HorizontalNav";
 import {Link} from "react-router-dom";
 import {switchLanguage, toggleCollapsedSideNav} from "../../../appRedux/actions";
+import {notificationApi} from "api/notification";
 
 const {Header} = Layout;
 
@@ -24,6 +25,13 @@ const InsideHeader = () => {
   const dispatch = useDispatch();
   const navCollapsed = useSelector(({settings}) => settings.navCollapsed);
   const pathname = useSelector(({settings}) => settings.pathname);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    notificationApi.setFcm('fcm-token').then(() => console.log('fcm set'));
+    notificationApi.getAll()
+      .then(res => setNotifications(res?.data));
+  }, []);
 
   return (
     <div className="gx-header-horizontal gx-header-horizontal-dark gx-inside-header-horizontal">
@@ -47,7 +55,7 @@ const InsideHeader = () => {
             </div>
             <ul className="gx-header-notifications gx-ml-auto">
               <li className="gx-notify">
-                <Popover overlayClassName="gx-popover-horizantal" placement="bottomRight" content={<AppNotification/>}
+                <Popover overlayClassName="gx-popover-horizantal" placement="bottomRight" content={<AppNotification notifications={notifications}/>}
                          trigger="click">
                   <span className="gx-pointer gx-d-block"><i className="icon icon-notification"/></span>
                 </Popover>

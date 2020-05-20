@@ -3,11 +3,19 @@
 const PORT = process.env.PORT || 8080;
 
 const express = require('express');
+const Multer = require('multer');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
 require('./src/db')();
 require('./src/Model');
+
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    fileSize: 50 * 1024 * 1024 // no larger than 5mb, you can change as needed.
+  }
+});
 
 const app = express();
 const routerPost = express.Router();
@@ -17,7 +25,7 @@ const routerTag = express.Router();
 app.use(cors());
 app.use(express.json());
 app.use(authenticate);
-app.use('/api/posts', require('./src/PostRoutes')(routerPost));
+app.use('/api/posts', require('./src/PostRoutes')(routerPost, multer));
 app.use('/api/categories', require('./src/CategoryRoutes')(routerCategory));
 app.use('/api/tags', require('./src/TagRoutes')(routerTag));
 

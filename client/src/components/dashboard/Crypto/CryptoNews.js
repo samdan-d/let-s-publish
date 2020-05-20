@@ -13,7 +13,6 @@ const CryptoNews = () => {
   const [news, setNews] = useState(newsData[0]);
   const [loader, setLoader] = useState(false);
 
-
   const handleChange = (e) => {
     const value = e.target.value;
     setNews(newsData[value]);
