@@ -3,7 +3,7 @@ import React from "react";
 export const taskList = [
   {
     id: 1,
-    title: 'Make the home page dynamic',
+    title: 'Make the Home page dynamic',
     completed: false,
     user: {
       projectName: 'Chatbull',

@@ -29,7 +29,7 @@ const productData = [
       },
     ],
     rating: 5,
-    description: "Horo is a home grown brand with utmost emphasis on quality goods to users... ",
+    description: "Horo is a Home grown brand with utmost emphasis on quality goods to users... ",
   }, {
     thumb: "https://via.placeholder.com/600x400",
     name: 'Bizinto 1 Three Pin',
@@ -246,7 +246,7 @@ const productData = [
       },
     ],
     rating: 5,
-    description: "Horo is a home grown brand with emphasis on quality goods to our users... ",
+    description: "Horo is a Home grown brand with emphasis on quality goods to our users... ",
   }, {
     thumb: "https://via.placeholder.com/600x400",
     name: 'football',
@@ -463,7 +463,7 @@ const productData = [
       },
     ],
     rating: 5,
-    description: "Horo is a home grown brand with utmost emphasis on quality goods ",
+    description: "Horo is a Home grown brand with utmost emphasis on quality goods ",
   }, {
     thumb: "https://via.placeholder.com/600x400",
     name: 'Bizinto 1 Three Pin',

@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 8083;
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 require('./src/db')();
 require('./src/Model');
@@ -11,6 +12,7 @@ require('./src/Model');
 const app = express();
 const router = express.Router();
 
+app.use(cors());
 app.use(express.json());
 app.use(authenticate);
 app.use('/api/notifications', require('./src/NotificationRoutes')(router));

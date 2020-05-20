@@ -4,18 +4,22 @@ const PORT = process.env.PORT || 8080;
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 require('./src/db')();
 require('./src/Model');
 
 const app = express();
-const router = express.Router();
+const routerPost = express.Router();
+const routerCategory = express.Router();
+const routerTag = express.Router();
 
+app.use(cors());
 app.use(express.json());
 app.use(authenticate);
-app.use('/api/tags', require('./src/TagRoutes')(router));
-app.use('/api/categories', require('./src/CategoryRoutes')(router));
-app.use('/api/posts', require('./src/PostRoutes')(router));
+app.use('/api/posts', require('./src/PostRoutes')(routerPost));
+app.use('/api/categories', require('./src/CategoryRoutes')(routerCategory));
+app.use('/api/tags', require('./src/TagRoutes')(routerTag));
 
 app.listen(PORT);
 console.log(`Post api running on http://localhost:${PORT}`);

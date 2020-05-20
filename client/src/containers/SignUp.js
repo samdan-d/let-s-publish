@@ -6,11 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   hideMessage,
   showAuthLoader,
-  userFacebookSignIn,
-  userGithubSignIn,
-  userGoogleSignIn,
-  userSignUp,
-  userTwitterSignIn
+  userSignUp
 } from "appRedux/actions/Auth";
 
 import IntlMessages from "util/IntlMessages";
@@ -41,7 +37,8 @@ const SignUp = (props) => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       console.log("values", values);
-      if (!err) {
+      const {password, repeat_password} = values;
+      if (!err && password === repeat_password) {
         dispatch(showAuthLoader());
         dispatch(userSignUp(values));
       }
@@ -50,67 +47,67 @@ const SignUp = (props) => {
 
   const {getFieldDecorator} = props.form;
 
-    return (
-      <div className="gx-app-login-wrap">
-        <div className="gx-app-login-container">
-          <div className="gx-app-login-main-content">
-            <div className="gx-app-logo-content">
-              <div className="gx-app-logo-content-bg">
-              </div>
-              <div className="gx-app-logo-wid">
-                <h1><IntlMessages id="app.userAuth.signUp"/></h1>
-              </div>
-              <div className="gx-app-logo">
-                <img alt="example" src={require("assets/images/logo.png")}/>
-              </div>
+  return (
+    <div className="gx-app-login-wrap">
+      <div className="gx-app-login-container">
+        <div className="gx-app-login-main-content">
+          <div className="gx-app-logo-content">
+            <div className="gx-app-logo-content-bg">
             </div>
-
-            <div className="gx-app-login-content">
-              <Form onSubmit={handleSubmit} className="gx-signup-form gx-form-row0">
-                <FormItem>
-                  {getFieldDecorator('userName', {
-                    rules: [{required: true, message: 'Please input your username!'}],
-                  })(
-                    <Input placeholder="Username"/>
-                  )}
-                </FormItem>
-
-                <FormItem>
-                  {getFieldDecorator('email', {
-                    rules: [{
-                      required: true, type: 'email', message: 'The input is not valid E-mail!',
-                    }],
-                  })(
-                    <Input placeholder="Email"/>
-                  )}
-                </FormItem>
-                <FormItem>
-                  {getFieldDecorator('password', {
-                    rules: [{required: true, message: 'Please input your Password!'}],
-                  })(
-                    <Input type="password" placeholder="Password"/>
-                  )}
-                </FormItem>
-                <FormItem>
-                  <Button type="primary" className="gx-mb-0" htmlType="submit">
-                    <IntlMessages id="app.userAuth.signUp"/>
-                  </Button>
-                  <span><IntlMessages id="app.userAuth.or"/></span> <Link to="/signin"><IntlMessages
-                  id="app.userAuth.signIn"/></Link>
-                </FormItem>
-              </Form>
+            <div className="gx-app-logo-wid">
+              <h1><IntlMessages id="app.userAuth.signUp"/></h1>
             </div>
-            {loader &&
-            <div className="gx-loader-view">
-              <CircularProgress/>
+            <div className="gx-app-logo">
+              <img alt="example" src={require("assets/images/logo.png")}/>
             </div>
-            }
-            {showMessage &&
-            message.error(alertMessage)}
           </div>
+
+          <div className="gx-app-login-content">
+            <Form onSubmit={handleSubmit} className="gx-signup-form gx-form-row0">
+              <FormItem>
+                {getFieldDecorator('username', {
+                  rules: [{required: true, message: 'Please input your username!'}],
+                })(
+                  <Input placeholder="Username"/>
+                )}
+              </FormItem>
+
+              <FormItem>
+                {getFieldDecorator('password', {
+                  rules: [{
+                    rules: [{required: true, message: 'Please input your Password!'}],
+                  }],
+                })(
+                  <Input type="password" placeholder="password"/>
+                )}
+              </FormItem>
+              <FormItem>
+                {getFieldDecorator('repeat_password', {
+                  rules: [{required: true, message: 'Please input your Password!'}],
+                })(
+                  <Input type="password" placeholder="Password"/>
+                )}
+              </FormItem>
+              <FormItem>
+                <Button type="primary" className="gx-mb-0" htmlType="submit">
+                  <IntlMessages id="app.userAuth.signUp"/>
+                </Button>
+                <span><IntlMessages id="app.userAuth.or"/></span> <Link to="/signin"><IntlMessages
+                id="app.userAuth.signIn"/></Link>
+              </FormItem>
+            </Form>
+          </div>
+          {loader &&
+          <div className="gx-loader-view">
+            <CircularProgress/>
+          </div>
+          }
+          {showMessage &&
+          message.error(alertMessage)}
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 

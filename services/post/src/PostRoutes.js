@@ -10,7 +10,7 @@ module.exports = (r) => {
         ...req.body
       })
         .then((post) => res.json({post}))
-        .catch((error) => res.json({error}));
+        .catch((error) => res.status(400).json({error}));
     } else {
       res.status(400).json({error: 'must be admin'})
     }
@@ -23,7 +23,7 @@ module.exports = (r) => {
         ...req.body
       })
         .then((post) => res.json({post}))
-        .catch((error) => res.json({error}));
+        .catch((error) => res.status(400).json({error}));
     } else {
       res.status(400).json({error: 'must be admin or valid id'})
     }
@@ -38,7 +38,7 @@ module.exports = (r) => {
           else
             res.status(404).json({error: 'not found'})
         })
-        .catch((error) => res.json({error}));
+        .catch((error) => res.status(400).json({error}));
     } else {
       res.status(400).json({error: 'login or give all info'})
     }
@@ -52,13 +52,13 @@ module.exports = (r) => {
         else
           res.status(404).json({error: 'not found'})
       })
-      .catch((error) => res.json({error}));
+      .catch((error) => res.status(400).json({error}));
   });
 
   r.get('/', (req, res) => {
     Post.find()
       .then((posts) => res.json({posts}))
-      .catch((error) => res.json({error}));
+      .catch((error) => res.status(400).json({error}));
   });
 
   return r;

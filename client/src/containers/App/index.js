@@ -57,10 +57,10 @@ const App = (props) => {
 
     link.className = 'gx-style';
     document.body.appendChild(link);
-  },[]);
+  }, []);
 
   useEffect(() => {
-        if (initURL === '') {
+    if (initURL === '') {
       dispatch(setInitUrl(location.pathname));
     }
     const params = new URLSearchParams(location.search);
@@ -113,6 +113,8 @@ const App = (props) => {
     if (location.pathname === '/') {
       if (authUser === null) {
         history.push('/signin');
+      } else if (authUser.isAdmin) {
+        history.push('/admin/home');
       } else if (initURL === '' || initURL === '/' || initURL === '/signin') {
         history.push('/main/dashboard/crypto');
       } else {
@@ -128,12 +130,10 @@ const App = (props) => {
       <IntlProvider
         locale={currentAppLocale.locale}
         messages={currentAppLocale.messages}>
-
         <Switch>
           <Route exact path='/signin' component={SignIn}/>
           <Route exact path='/signup' component={SignUp}/>
-          <RestrictedRoute path={`${match.url}`} authUser={authUser} location={location}
-                           component={MainApp}/>
+          <RestrictedRoute path={`${match.url}`} authUser={authUser} location={location} component={MainApp}/>
         </Switch>
       </IntlProvider>
     </LocaleProvider>

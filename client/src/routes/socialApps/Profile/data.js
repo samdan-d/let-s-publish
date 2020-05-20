@@ -49,7 +49,7 @@ export const aboutList = [
   {
     id: 4,
     title: 'Lives in London',
-    icon: 'home',
+    icon: 'Home',
     userList: '',
     desc: ['From Switzerland']
   },

@@ -1,16 +1,10 @@
 import React, {useState} from "react";
 import {Button, Dropdown, Icon, Layout, Menu, message, Popover} from 'antd';
 import {connect, useDispatch, useSelector} from "react-redux";
-import CustomScrollbars from "util/CustomScrollbars";
-import languageData from "../languageData";
-import SearchBox from "components/SearchBox";
-import UserInfo from "components/UserInfo";
 import AppNotification from "components/AppNotification";
-import MailNotification from "components/MailNotification";
 import HorizontalNav from "../HorizontalNav";
 import {Link} from "react-router-dom";
-import {switchLanguage, toggleCollapsedSideNav} from "../../../appRedux/actions/Setting";
-import IntlMessages from "../../../util/IntlMessages";
+import {switchLanguage, toggleCollapsedSideNav} from "../../../appRedux/actions";
 
 const {Header} = Layout;
 
@@ -33,18 +27,6 @@ const InsideHeader = () => {
 
   return (
     <div className="gx-header-horizontal gx-header-horizontal-dark gx-inside-header-horizontal">
-      <div className="gx-header-horizontal-top">
-        <div className="gx-container">
-          <div className="gx-header-horizontal-top-flex">
-            <ul className="gx-login-list">
-              <li>Login</li>
-              <li>Signup</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-
       <Header
         className="gx-header-horizontal-main">
         <div className="gx-container">

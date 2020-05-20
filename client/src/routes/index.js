@@ -8,11 +8,13 @@ import ExtraComponents from "./extraComponents/index";
 import InBuiltApps from "./inBuiltApps/index";
 import SocialApps from "./socialApps/index";
 import Main from "./main/index";
+import Admin from "routes/admin";
 import Documents from "./documents/index";
 
 const App = ({match}) => (
   <div className="gx-main-content-wrapper">
     <Switch>
+      <Route path={`${match.url}admin`} component={Admin}/>
       <Route path={`${match.url}main`} component={Main}/>
       <Route path={`${match.url}components`} component={Components}/>
       <Route path={`${match.url}custom-views`} component={CustomViews}/>

@@ -53,7 +53,7 @@ const SignIn = (props) => {
       <div className="gx-app-login-container">
         <div className="gx-app-login-main-content">
           <div className="gx-app-logo-content">
-            <div className="gx-app-logo-content-bg" />
+            <div className="gx-app-logo-content-bg"/>
             <div className="gx-app-logo-wid">
               <h1><IntlMessages id="app.userAuth.signIn"/></h1>
             </div>
@@ -64,18 +64,18 @@ const SignIn = (props) => {
           <div className="gx-app-login-content" style={{"margin-top": "8%"}}>
             <Form onSubmit={handleSubmit} className="gx-signin-form gx-form-row0">
               <FormItem>
-                {getFieldDecorator('email', {
-                  initialValue: "demo@example.com",
+                {getFieldDecorator('username', {
+                  initialValue: "",
                   rules: [{
-                    required: true, type: 'email', message: 'The input is not valid E-mail!',
+                    required: true, message: 'The input is not valid E-mail!',
                   }],
                 })(
-                  <Input placeholder="Email"/>
+                  <Input placeholder="Username"/>
                 )}
               </FormItem>
               <FormItem>
                 {getFieldDecorator('password', {
-                  initialValue: "demo#123",
+                  initialValue: "",
                   rules: [{required: true, message: 'Please input your Password!'}],
                 })(
                   <Input type="password" placeholder="Password"/>

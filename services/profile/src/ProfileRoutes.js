@@ -67,7 +67,8 @@ module.exports = (r, m) => {
       const newUser = await User.create({username, password});
       res.json({
         access_token: createAccessToken(newUser),
-        refresh_token: newUser.refreshToken
+        refresh_token: newUser.refreshToken,
+        user: newUser
       });
     } catch (e) {
       res.status(400).json(e);
@@ -75,7 +76,7 @@ module.exports = (r, m) => {
   });
 
   // gets access & refresh token
-  r.get('/login', v.validateBodySchema(v.loginSchema), async (req, res) => {
+  r.post('/login', v.validateBodySchema(v.loginSchema), async (req, res) => {
     try {
       const {username, password} = req.value;
       const user = await User.findOne({username});
@@ -84,7 +85,8 @@ module.exports = (r, m) => {
       user.updateRefreshToken(req.get('refresh-token'));
       res.json({
         access_token: createAccessToken(user),
-        refresh_token: user.refreshToken
+        refresh_token: user.refreshToken,
+        user
       });
     } catch (e) {
       console.log(e);
@@ -174,6 +176,7 @@ function authenticate(req, res, next) {
       next();
     }
   } catch (e) {
+    console.log(e);
     res.status(401).json({
       error: {
         accessToken: 'access-token is invalid'
