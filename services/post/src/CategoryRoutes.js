@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const Tag = mongoose.model('Tag');
+const Category = mongoose.model('Category');
 
 module.exports = (r) => {
   r.post('/', (req, res) => {
     if (req.user.isAdmin && req.body.name) {
-      Tag.create({name: req.body.name})
-        .then((tag) => res.json({tag}))
+      Category.create({name: req.body.name})
+        .then((category) => res.json({category}))
         .catch((error) => res.json({error}));
     } else {
       res.status(400).json({error: 'login or give all info'})
@@ -15,10 +15,10 @@ module.exports = (r) => {
 
   r.delete('/:id', (req, res) => {
     if (req.user.isAdmin && req.params.id) {
-      Tag.findByIdAndRemove(req.params.id)
-        .then((tag) => {
-          if (tag)
-            res.json({tag})
+      Category.findByIdAndRemove(req.params.id)
+        .then((category) => {
+          if (category)
+            res.json({category})
           else
             res.status(404).json({error: 'not found'})
         })
@@ -29,10 +29,10 @@ module.exports = (r) => {
   });
 
   r.get('/:id', (req, res) => {
-    Tag.findById(req.params.id)
-      .then((tag) => {
-        if (tag)
-          res.json({tag})
+    Category.findById(req.params.id)
+      .then((category) => {
+        if (category)
+          res.json({category})
         else
           res.status(404).json({error: 'not found'})
       })
@@ -40,8 +40,8 @@ module.exports = (r) => {
   });
 
   r.get('/', (req, res) => {
-    Tag.find()
-      .then((tags) => res.json({tags}))
+    Category.find()
+      .then((categories) => res.json({categories}))
       .catch((error) => res.json({error}));
   });
 

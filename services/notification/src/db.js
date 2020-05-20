@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports = async () => {
   try {
-    await mongoose.connect('mongodb://mongodb:27017/post', {
+    await mongoose.connect('mongodb://mongodb:27017/notification', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,

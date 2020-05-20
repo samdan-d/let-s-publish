@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const {Schema} = mongoose;
 
 const tagSchema = new Schema({
   name: {
@@ -7,8 +7,7 @@ const tagSchema = new Schema({
     required: true,
     index: true,
     unique: true
-  },
-  _user: Schema.Types.ObjectId
+  }
 }, {timestamps: true});
 
 mongoose.model('Tag', tagSchema);

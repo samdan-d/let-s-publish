@@ -14,28 +14,28 @@ services:
   #     - 80:3000
   #   environment:
   #     - CHOKIDAR_USEPOLLING=true
-#  post_api:
-#    build: ./services/post/
-#    ports:
-#      - "8080:8080"
-#    volumes:
-#      - ./services/post/:/post_api
-#      - /post_api/node_modules
-#    depends_on:
-#      - mongodb
-#    networks:
-#      - let-s-publish-network
-#  comment_api:
-#    build: ./services/comment/
-#    ports:
-#      - "8081:8080"
-#    volumes:
-#      - ./services/comment/:/pos
-#      - /post_api/node_module
-#    depends_on:
-#      - mongodb
-#    networks:
-#      - let-s-publish-network
+  post_api:
+    build: ./services/post/
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./services/post/:/post_api
+      - /post_api/node_modules
+    depends_on:
+      - mongodb
+    networks:
+      - let-s-publish-network
+  comment_api:
+    build: ./services/comment/
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./services/comment/:/comment_api
+      - /comment_api/node_module
+    depends_on:
+      - mongodb
+    networks:
+      - let-s-publish-network
   profile_api:
     build: ./services/profile/
     ports:
@@ -47,17 +47,17 @@ services:
       - mongodb
     networks:
       - let-s-publish-network
-#  notification_api:
-#    build: ./services/notification/
-#    ports:
-#      - "8083:8080"
-#    volumes:
-#      - ./services/notification/:/notification_api
-#      - /notification_api/node_modules
-#    depends_on:
-#      - mongodb
-#    networks:
-#      - let-s-publish-network
+  notification_api:
+    build: ./services/notification/
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./services/notification/:/notification_api
+      - /notification_api/node_modules
+    depends_on:
+      - mongodb
+    networks:
+      - let-s-publish-network
 networks:
   let-s-publish-network:
     driver: bridge

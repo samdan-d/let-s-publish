@@ -1,6 +1,6 @@
 'use strict';
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8083;
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -13,9 +13,7 @@ const router = express.Router();
 
 app.use(express.json());
 app.use(authenticate);
-app.use('/api/tags', require('./src/TagRoutes')(router));
-app.use('/api/categories', require('./src/CategoryRoutes')(router));
-app.use('/api/posts', require('./src/PostRoutes')(router));
+app.use('/api/notifications', require('./src/NotificationRoutes')(router));
 
 app.listen(PORT);
 console.log(`Post api running on http://localhost:${PORT}`);
