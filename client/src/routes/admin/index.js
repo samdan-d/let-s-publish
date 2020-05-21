@@ -4,6 +4,7 @@ import Home from "./Home";
 import Post from "./Post.jsx";
 import Tags from "./Tags";
 import User from "./User";
+import Comments from "./Comments";
 import Categories from "./Categories";
 
 const Admin = ({match}) => (
@@ -13,6 +14,7 @@ const Admin = ({match}) => (
     <Route path={`${match.url}/tags`} component={Tags}/>
     <Route path={`${match.url}/categories`} component={Categories}/>
     <Route path={`${match.url}/users`} component={User}/>
+    <Route path={`${match.url}/comments`} component={Comments}/>
   </Switch>
 );
 

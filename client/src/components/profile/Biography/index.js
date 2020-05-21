@@ -2,7 +2,8 @@ import React from "react";
 import Widget from "components/Widget";
 import Background from 'assets/images/post/ibm.jpg';
 
-import {Comment, Avatar, Form, Button, List, Input} from 'antd';
+import {Typography, Comment, Avatar, Form, Button, List, Input} from 'antd';
+import {commentApi} from "api/notification";
 
 const {TextArea} = Input;
 
@@ -44,8 +45,8 @@ class Biography extends React.Component {
       submitting: true,
     });
 
-    setTimeout(() => {
-      this.setState({
+    commentApi.create('5ec3c1526835e601376e9954', this.state.value)
+      .then(() => this.setState({
         submitting: false,
         value: '',
         comments: [
@@ -57,8 +58,23 @@ class Biography extends React.Component {
           },
           ...this.state.comments,
         ],
+      }))
+      .catch(e => {
+        console.log(e);
+        this.setState({
+          submitting: false,
+          value: '',
+          comments: [
+            {
+              author: 'demo',
+              avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+              content: <p>{this.state.value}</p>,
+              datetime: Date.now(),
+            },
+            ...this.state.comments,
+          ],
+        });
       });
-    }, 1000);
   };
 
   handleChange = e => {
@@ -125,7 +141,7 @@ class Biography extends React.Component {
             avatar={
               <Avatar
                 src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                alt="Han Solo"
+                alt="demo"
               />
             }
             content={
